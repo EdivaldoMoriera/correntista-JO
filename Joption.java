@@ -1,11 +1,16 @@
 
+
 import javax.swing.JOptionPane;
 
 public class Joption {
     public static void main(String[] args) {
         Account conta = new Account();
-
-        conta.setNumero(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Numero da conta")));
+        try {
+            conta.setNumero(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Numero da conta")));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, " tem que ser numero inteiro ");//corrigir num futuro proxim
+            e.notifyAll();
+                   }
 
         conta.setCorrentista(JOptionPane.showInputDialog(null, "Informeo o nome do Correntista: "));
 
@@ -16,6 +21,7 @@ public class Joption {
                     .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito inicial"));
 
             conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
+            JOptionPane.showMessageDialog(null, conta);
         }
 
         else {
@@ -23,13 +29,11 @@ public class Joption {
             JOptionPane.showMessageDialog(null, conta);
 
             double initialDeposit = Double
-            .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito"));
+                    .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito"));
             conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
             JOptionPane.showMessageDialog(null, conta);
-            
 
         }
-
 
     }
 }

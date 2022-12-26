@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Joption {
     public static void main(String[] args) {
+        double initialDeposit;
         Account conta = new Account();
         try {
             conta.setNumero(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Numero da conta")));
@@ -17,7 +18,7 @@ public class Joption {
         String response = JOptionPane.showInputDialog(null, "haverá deposito  inicial (s/n)? ");
 
         if (response.equals("s")) {
-            double initialDeposit = Double
+             initialDeposit = Double
                     .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito inicial"));
 
             conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
@@ -28,12 +29,25 @@ public class Joption {
             conta = new Account(conta.getNumero(), conta.getCorrentista());
             JOptionPane.showMessageDialog(null, conta);
 
-            double initialDeposit = Double
+             initialDeposit = Double
                     .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito"));
             conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
             JOptionPane.showMessageDialog(null, conta);
 
         }
+       /* JOptionPane.showOptionDialog(null, conta, " SALDO " + initialDeposit, 0, 0, null, args, response); //mostra o saldo*/
+        
+        JOptionPane.showInputDialog("Informe o valor do saque");
+        if(initialDeposit + conta.getSaldo()> 0){
+
+
+        JOptionPane.showOptionDialog(null, conta, " SALDO " + initialDeposit, 0, 0, null, args, response); //mostra o saldo*/
+        }
+        else{
+            JOptionPane.showMessageDialog(null,  "Saldo insuficiente");
+        }
+
+        }
 
     }
-}
+

@@ -1,53 +1,51 @@
 
 
-import javax.swing.JOptionPane;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Joption {
-    public static void main(String[] args) {
-        double initialDeposit;
-        Account conta = new Account();
-        try {
-            conta.setNumero(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o Numero da conta")));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, " tem que ser numero inteiro ");//corrigir num futuro proxim
-            e.notifyAll();
-                   }
+ 
+	public static void main(String[] args) {
 
-        conta.setCorrentista(JOptionPane.showInputDialog(null, "Informeo o nome do Correntista: "));
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		Account account;
 
-        String response = JOptionPane.showInputDialog(null, "haverá deposito  inicial (s/n)? ");
+		System.out.print("Enter account number: ");
+		int number = sc.nextInt();
+		System.out.print("Enter account holder: ");
+		sc.nextLine();
+		String holder = sc.nextLine();
+		System.out.print("Is there an initial deposit (y/n)? ");
+		char response = sc.next().charAt(0);
+		if (response == 'y') {
+			System.out.print("Enter initial deposit value: ");
+			double initialDeposit = sc.nextDouble();
+			account = new Account(number, holder, initialDeposit);
+		}
+		else {
+			account = new Account(number, holder);
+		}
+		
+		System.out.println();
+		System.out.println("Account data:");
+		System.out.println(account);
+		
+		System.out.println();
+		System.out.print("Enter a deposit value: ");
+		double depositValue = sc.nextDouble();
+		account.deposit(depositValue);
+		System.out.println("Updated account data:");
+		System.out.println(account);
+		
+		System.out.println();
+		System.out.print("Enter a withdraw value: ");
+		double withdrawValue = sc.nextDouble();
+		account.withdraw(withdrawValue);
+		System.out.println("Updated account data:");
+		System.out.println(account);
+		
+		sc.close();
+	}
 
-        if (response.equals("s")) {
-             initialDeposit = Double
-                    .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito inicial"));
-
-            conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
-            JOptionPane.showMessageDialog(null, conta);
-        }
-
-        else {
-            conta = new Account(conta.getNumero(), conta.getCorrentista());
-            JOptionPane.showMessageDialog(null, conta);
-
-             initialDeposit = Double
-                    .parseDouble(JOptionPane.showInputDialog(null, "Entre com o deposito"));
-            conta = new Account(conta.getNumero(), conta.getCorrentista(), initialDeposit);
-            JOptionPane.showMessageDialog(null, conta);
-
-        }
-       /* JOptionPane.showOptionDialog(null, conta, " SALDO " + initialDeposit, 0, 0, null, args, response); //mostra o saldo*/
-        
-        JOptionPane.showInputDialog("Informe o valor do saque");
-        if(initialDeposit + conta.getSaldo()> 0){
-
-
-        JOptionPane.showOptionDialog(null, conta, " SALDO " + initialDeposit, 0, 0, null, args, response); //mostra o saldo*/
-        }
-        else{
-            JOptionPane.showMessageDialog(null,  "Saldo insuficiente");
-        }
-
-        }
-
-    }
-
+}
